@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Etch-A-Sketch</title>
+    <link id="linkElement" rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Etch-A-Sketch</h1>
+    </header>
+
+    <div class="container" id="container">
+    </div>
+    <div id="button">
+        <button type="button">Grid Size / Reset</button>
+    </div>
+    <script>
+        const container = document.querySelector('.container');
+        let gridSize = []
+        let gridNum = 16
+        let randColor = Math.floor(Math.random() * 256);
+
+        let button = document.querySelector("button");
+        button.addEventListener("click", () => {
+            gridReset();
+        });
+
+        function gridStyleTemplate(gridNum){
+            const gridPixelSize = 960 / gridNum
+
+            container.style.gridTemplateColumns = `repeat(${gridNum}, ${gridPixelSize}px)`;
+            container.style.gridTemplateRows = `repeat(${gridNum}, ${gridPixelSize}px)`;
+        }
+
+        //get object of div names.
+        function getDivNames(grid) {
+            for (let i = 0; i < grid; i++) {
+                gridSize.push("div" + i);
+            }
+        }
+
+        function createDiv() {
+            for (let i = 0; i < (gridSize.length ** 2); i++) {
+                let div = document.createElement("div");
+                    div.className = "gridChild";
+                    container.appendChild(div);
+            }
+        }
+
+        function delDiv() {
+            container.querySelectorAll('*').forEach(n => n.remove());
+        }
+
+        //get div name  
+        window.onmouseover=function(e) {
+            if (e.target.className === "gridChild") {
+                // let divStyle = document.querySelector(e.target).style;
+                // divStyle.baclgroundColor = 'red';
+                e.target.style.backgroundColor = `rgb(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`;
+                // e.target.className = "gridHover";
+            }
+        };
+
+        function gridReset() {
+            gridPrompt = prompt("Please enter a Prompt size (Max 100)!", "");
+            delDiv();
+            gridSize = []
+            gridRun(gridPrompt)
+        }
+
+        function gridRun(gridNum) {
+            gridStyleTemplate(gridNum)
+            getDivNames(gridNum);
+            createDiv();
+        }
+        gridRun(gridNum)
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+body {
+  background-color: #2d3238;
+}
+
+#button {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+button {
+  padding: 20px 30px;
+  font-size: 14px;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+}
+
+.container {
+    display: grid;
+    justify-content: center;
+}
+
+.gridChild {
+    background-color: lightgrey;
+    /* border: 1px solid black; */
+}
+
+.gridHover {
+    background-color: black;
+}
